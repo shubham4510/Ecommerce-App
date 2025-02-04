@@ -11,10 +11,10 @@ const orderRouter = require('./view/order.view.js')
 const app = express();
 
 // Updated CORS options
-const allowedOrigins = [
-  "http://localhost:5173", 
-  "https://forever-ecommerce-app-shubh.netlify.app"
-];
+// const allowedOrigins = [
+//   "http://localhost:5173", 
+//   "https://forever-ecommerce-app-shubh.netlify.app"
+// ];
 
 const PORT = Number(process.env.PORT) || 5000
 
@@ -31,13 +31,7 @@ app.use(express.urlencoded({ extended: true ,limit:'10mb'}));
 app.use(cookieParser())
 app.use(
   cors({
-    origin: function (origin, callback) {
-      if (!origin || allowedOrigins.includes(origin)) {
-        callback(null, true);
-      } else {
-        callback(new Error("Not allowed by CORS"));
-      }
-    },
+    origin: "*",
     credentials: true, // If using cookies or authentication tokens
   })
 );
