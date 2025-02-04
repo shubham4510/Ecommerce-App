@@ -9,6 +9,13 @@ const userRouter = require('./view/user.view.js')
 const orderRouter = require('./view/order.view.js')
 
 const app = express();
+
+// Updated CORS options
+const allowedOrigins = [
+  "http://localhost:5173", 
+  "https://forever-ecommerce-app-shubh.netlify.app"
+];
+
 const PORT = Number(process.env.PORT) || 5000
 
 //MONGODB CONNECTION
@@ -22,10 +29,18 @@ connectCloudinary();
 app.use(express.json({limit:'10mb'}))
 app.use(express.urlencoded({ extended: true ,limit:'10mb'}));
 app.use(cookieParser())
-app.use(cors({
-    origin: 'http://localhost:5173', // React app's URL
-    credentials: true,
-}));
+app.use(
+  cors({
+    origin: function (origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    credentials: true, // If using cookies or authentication tokens
+  })
+);
 
 
 //ROUTES
