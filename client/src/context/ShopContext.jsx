@@ -2,7 +2,7 @@ import React, { createContext, useCallback, useEffect, useState,useMemo } from "
 import toast from "react-hot-toast";
 
 export const ShopContext = createContext(null);
-const url = `http://localhost:4000`;
+const url = `https://ecommerce-app-backend-hd8z.onrender.com`;
 
 const ShopContextProvider = (props) => {
   const [products, setProducts] = useState([]);
