@@ -4,8 +4,10 @@
   "main": "index.js",
   "type": "commonjs",
   "scripts": {
+    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "server": "nodemon index.js"
+    "server": "nodemon index.js",
+    "build": "echo 'No build step required'"
   },
   "keywords": [],
   "author": "",

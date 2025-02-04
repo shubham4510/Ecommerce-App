@@ -2,7 +2,7 @@ import React, { createContext, useCallback, useEffect, useState,useMemo } from "
 import toast from "react-hot-toast";
 
 export const ShopContext = createContext(null);
-const url = `http://localhost:4000/api/`;
+const url = `http://localhost:4000`;
 
 const ShopContextProvider = (props) => {
   const [products, setProducts] = useState([]);
@@ -17,7 +17,7 @@ const ShopContextProvider = (props) => {
     const addProduct = async (productData) => {
       try {
   
-          const response = await fetch(`${url}product/add`, {
+          const response = await fetch(`${url}/api/product/add`, {
               method: "POST",
               body: productData, // ✅ Send FormData directly
           });
@@ -39,7 +39,7 @@ const ShopContextProvider = (props) => {
     //PLACE ORDER
     const placeOrder = async (orderData)=>{
       try {
-        const response = await fetch(`${url}order/add`,{
+        const response = await fetch(`${url}/api/order/add`,{
           method:"POST",
           headers:{
             "Accept":"application/json",
@@ -82,7 +82,7 @@ const ShopContextProvider = (props) => {
     //User Signup
     const signup = async (userDetails) => {
       try {
-        const response = await fetch(`${url}user/signup`, {
+        const response = await fetch(`${url}/api/user/signup`, {
           method: "POST",
           headers: {
             "Accept": "application/jsond",
@@ -105,7 +105,7 @@ const ShopContextProvider = (props) => {
     //FETCH ORDERS
     const fetchOrders = async () => {
       try {
-          const response = await fetch(`${url}order/get`, {
+          const response = await fetch(`${url}/api/order/get`, {
               method: "GET",
               credentials: "include",
               headers: {
@@ -124,7 +124,7 @@ const ShopContextProvider = (props) => {
     //FETCH FULL ORDER DETAILS
     const fetchFullOrderDetails = async () => {
       try {
-          const response = await fetch(`${url}order/details/get`, {
+          const response = await fetch(`${url}/api/order/details/get`, {
               method: "GET",
               credentials: "include",
               headers: {
@@ -147,7 +147,7 @@ const ShopContextProvider = (props) => {
     //User Login
     const login = async (userDetails)=>{
       try {
-        const response = await fetch(`${url}user/login`,{
+        const response = await fetch(`${url}/api/user/login`,{
           headers:{
             'Accept':'application/json',
             'Content-Type':'application/json'
@@ -178,7 +178,7 @@ const ShopContextProvider = (props) => {
     //REMOVE PRODUCT
     const deleteProduct = async (id) => {
       try {
-        const response = await fetch(`${url}product/delete/${id}`,
+        const response = await fetch(`${url}/api/product/delete/${id}`,
          { method:'DELETE',
           credentials:'include',
         })
@@ -204,7 +204,7 @@ const ShopContextProvider = (props) => {
     //Logout
     const logout = async () => {
       try {
-        const response = await fetch(`${url}user/logout`, {
+        const response = await fetch(`${url}/api/user/logout`, {
           method: 'DELETE',
           credentials: 'include', // Make sure the cookie is included
         });
@@ -268,7 +268,7 @@ const ShopContextProvider = (props) => {
     
     const updateOrderStatus = async (orderId,itemId,status) => {
       try {
-        const response = await fetch(`${url}order/status`,{
+        const response = await fetch(`${url}/api/order/status`,{
           method:'PUT',
           headers:{
             'Accept':'application/json',
@@ -290,7 +290,7 @@ const ShopContextProvider = (props) => {
 
   const getAllProducts = async () => {
     try {
-      const result = await fetch(`${url}product/all`);
+      const result = await fetch(`${url}/api/product/all`);
       const data = await result.json();
       if (data && data.products?.length) {
         return data.products;
